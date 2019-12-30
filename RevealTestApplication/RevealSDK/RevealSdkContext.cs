@@ -8,20 +8,22 @@ namespace RevealTestApplication.RevealSDK
 {
     public class RevealSdkContext : IRevealSdkContext
     {
-        // In-memory provider
+        // // In-memory provider
         //public IRVDataSourceProvider DataSourceProvider => new InMemoryDataSourceProvider();
-        // In-memory data provider
+        // // In-memory data provider
         //public IRVDataProvider DataProvider => new InMemoryDataProvider();
 
         // Local Data source provider for LocalDataSource
-        //public IRVDataSourceProvider DataSourceProvider => new LocalDataSourceProvider();
+        public IRVDataSourceProvider DataSourceProvider => new LocalDataSourceProvider();
         // Local Data provider for LocalDataSource
-        //public IRVDataProvider DataProvider => null;
-
-        public IRVDataSourceProvider DataSourceProvider => new SqlServerDataSourceProvider();
         public IRVDataProvider DataProvider => null;
-        public IRVAuthenticationProvider AuthenticationProvider => new SqlServerAuthenticationProvider();
-        
+
+        // // SQL Data Source example
+        //public IRVDataSourceProvider DataSourceProvider => new SqlServerDataSourceProvider();
+        //public IRVDataProvider DataProvider => null;
+        //public IRVAuthenticationProvider AuthenticationProvider => new SqlServerAuthenticationProvider();
+
+        public IRVAuthenticationProvider AuthenticationProvider => null;
         public Task<Stream> GetDashboardAsync(string dashboardId)
         {
             var resourceName = $"RevealTestApplication.Dashboards.{dashboardId}";
