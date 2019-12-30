@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using RevealTestApplication.RevealSDK;
 using Infragistics.Sdk;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,15 +12,16 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RevealTestApplication.RevealSDK;
 
 namespace RevealTestApplication
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private string _webRootPath;
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            _webRootPath = environment.WebRootPath;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +38,7 @@ namespace RevealTestApplication
 
             services.AddRevealServices(new RevealEmbedSettings
             {
+                LocalFileStoragePath = Path.Combine(_webRootPath, "App_Data"),
                 CachePath = @"C:\Temp"
             }, new RevealSdkContext());
             

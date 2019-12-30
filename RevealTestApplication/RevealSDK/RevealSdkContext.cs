@@ -8,10 +8,13 @@ namespace RevealTestApplication.RevealSDK
 {
     public class RevealSdkContext : IRevealSdkContext
     {
-        public IRVDataSourceProvider DataSourceProvider => new InMemoryDataSourceProvider();
+        // In-memory provider
+        //public IRVDataSourceProvider DataSourceProvider => new InMemoryDataSourceProvider();
 
         public IRVDataProvider DataProvider => new InMemoryDataProvider();
 
+        // Local data source provider
+        public IRVDataSourceProvider DataSourceProvider => new LocalDataSourceProvider();
         public IRVAuthenticationProvider AuthenticationProvider => null;
 
         public Task<Stream> GetDashboardAsync(string dashboardId)
