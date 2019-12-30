@@ -10,13 +10,18 @@ namespace RevealTestApplication.RevealSDK
     {
         // In-memory provider
         //public IRVDataSourceProvider DataSourceProvider => new InMemoryDataSourceProvider();
+        // In-memory data provider
+        //public IRVDataProvider DataProvider => new InMemoryDataProvider();
 
-        public IRVDataProvider DataProvider => new InMemoryDataProvider();
+        // Local Data source provider for LocalDataSource
+        //public IRVDataSourceProvider DataSourceProvider => new LocalDataSourceProvider();
+        // Local Data provider for LocalDataSource
+        //public IRVDataProvider DataProvider => null;
 
-        // Local data source provider
-        public IRVDataSourceProvider DataSourceProvider => new LocalDataSourceProvider();
-        public IRVAuthenticationProvider AuthenticationProvider => null;
-
+        public IRVDataSourceProvider DataSourceProvider => new SqlServerDataSourceProvider();
+        public IRVDataProvider DataProvider => null;
+        public IRVAuthenticationProvider AuthenticationProvider => new SqlServerAuthenticationProvider();
+        
         public Task<Stream> GetDashboardAsync(string dashboardId)
         {
             var resourceName = $"RevealTestApplication.Dashboards.{dashboardId}";
